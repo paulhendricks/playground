@@ -12,7 +12,7 @@ random.seed(0)   # So scores are (slightly) more consistent. Randomness in pole 
 
 
 class SimulatedAnnealingAgent(object):
-    def __init__(self, action_space, repeats=10, alpha=1, decay=0.9, spread=0.5):
+    def __init__(self, action_space, repeats=10, alpha=1, decay=0.9, spread=0.1):
         self.name = 'SimAnn'    # Name to be submitted to OpenAI
         self.action_space = action_space  # Just for consistency with other agents, not used in this case
 
@@ -39,6 +39,8 @@ class SimulatedAnnealingAgent(object):
 
         # Else reset repeat count and set new values based on current best, spread and alpha
         self.repeat_count = 0
+        # (random.random() - self.spread)
+        # random.gauss(0, 0.1)
         return [self.best[i] + (random.random() - self.spread) * self.alpha for i in range(self.obs_count)]
 
     # Choose action based on observed values
@@ -96,30 +98,42 @@ class SimulatedAnnealingAgent(object):
         return action
 
 
+import time
+
 def main():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
     env = gym.make('CartPole-v0')
-    agent = SimulatedAnnealingAgent(env.action_space, repeats=1, decay=0.9, spread=0.3)   # Initialise agent
+    agent = SimulatedAnnealingAgent(env.action_space, repeats=1, decay=0.99, spread=0.1)   # Initialise agent
 
     outdir = '/tmp/' + agent.name + '-results'
     env.monitor.start(outdir, force=True)
+    # env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
+    env.monitor.configure(video_callable=lambda count: False)
 
-    episode_count = 200
+    episode_count = 2000
     max_steps = 200
     reward = 0
     done = False
 
+
+    temp = list()
     for i in xrange(episode_count):
         ob = env.reset()
 
         for j in xrange(max_steps):
+            # print(ob)
+            # time.sleep(0.1)  # delays for 5 seconds
             action = agent.act(ob, reward, done)
+            # print(action)
+            # print(agent.best, agent.alpha, agent.best_score, agent.best_count)
             ob, reward, done, _ = env.step(action)
             if done:
+                temp.append((agent))
                 break
-
+    print(agent.best)
+    print(len(temp))
     # Dump result info to disk
     env.monitor.close()
 
