@@ -47,7 +47,6 @@ class SimulatedAnnealingAgent(object):
     def choose_action(self, observation):
         if sum(observation[i] * self.test[i] for i in range(self.obs_count)) > 0:
             return 1
-
         return 0
 
     # If get the same ep score then update best to average of all values that have reached the best score
