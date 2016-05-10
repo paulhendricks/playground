@@ -98,8 +98,6 @@ class SimulatedAnnealingAgent(object):
         return action
 
 
-import time
-
 def main():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
@@ -124,6 +122,7 @@ def main():
 
         for j in xrange(max_steps):
             # print(ob)
+            # import time
             # time.sleep(0.1)  # delays for 5 seconds
             action = agent.act(ob, reward, done)
             # print(action)
