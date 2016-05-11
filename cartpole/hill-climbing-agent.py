@@ -1,4 +1,4 @@
-"""TO BE EDITED
+"""Hill Climbing Agent for Cartpole Simulation
 
 Not Complete!
 """
@@ -136,6 +136,7 @@ def main():
     print(len(temp))
     # Dump result info to disk
     env.monitor.close()
+    return temp
 
 if __name__ == '__main__':
     main()
