@@ -1,4 +1,4 @@
-"""Hill Climbing Agent for Cartpole Simulation
+"""Monte Carlo Agent for Cartpole Simulation
 
 Not Complete!
 """
@@ -8,10 +8,13 @@ import random
 import gym
 
 
+__all__ = ['MonteCarloAgent']
+
+
 random.seed(0)   # So scores are (slightly) more consistent. Randomness in pole counteracts this a bit
 
 
-class SimulatedAnnealingAgent(object):
+class MonteCarloAgent(object):
     def __init__(self, action_space, repeats=10, alpha=1, decay=0.9, spread=0.1):
         self.name = 'SimAnn'    # Name to be submitted to OpenAI
         self.action_space = action_space  # Just for consistency with other agents, not used in this case
@@ -109,10 +112,10 @@ def main():
 
     outdir = '/tmp/' + agent.name + '-results'
     env.monitor.start(outdir, force=True)
-    # env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
-    env.monitor.configure(video_callable=lambda count: False)
+    env.monitor.start(outdir, force=True, video_callable=lambda count: count % 100 == 0)
+    # env.monitor.configure(video_callable=lambda count: False)
 
-    episode_count = 2000
+    episode_count = 100
     max_steps = 200
     reward = 0
     done = False
@@ -124,7 +127,7 @@ def main():
 
         for j in xrange(max_steps):
             # print(ob)
-            # time.sleep(0.1)  # delays for 5 seconds
+            time.sleep(0.1)  # delays for 5 seconds
             action = agent.act(ob, reward, done)
             # print(action)
             # print(agent.best, agent.alpha, agent.best_score, agent.best_count)

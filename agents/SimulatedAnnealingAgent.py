@@ -1,4 +1,4 @@
-"""TO BE EDITED
+"""Simulated Annealing Agent for Cartpole Simulation
 
 Not Complete!
 """
@@ -6,6 +6,9 @@ import logging
 import random
 
 import gym
+
+
+__all__ = ['SimulatedAnnealingAgent']
 
 
 random.seed(0)   # So scores are (slightly) more consistent. Randomness in pole counteracts this a bit
@@ -47,6 +50,7 @@ class SimulatedAnnealingAgent(object):
     def choose_action(self, observation):
         if sum(observation[i] * self.test[i] for i in range(self.obs_count)) > 0:
             return 1
+
         return 0
 
     # If get the same ep score then update best to average of all values that have reached the best score
@@ -97,8 +101,6 @@ class SimulatedAnnealingAgent(object):
         return action
 
 
-import time
-
 def main():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
@@ -123,6 +125,7 @@ def main():
 
         for j in xrange(max_steps):
             # print(ob)
+            # import time
             # time.sleep(0.1)  # delays for 5 seconds
             action = agent.act(ob, reward, done)
             # print(action)
