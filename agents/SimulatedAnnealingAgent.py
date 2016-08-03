@@ -110,8 +110,8 @@ def main():
 
     outdir = '/tmp/' + agent.name + '-results'
     env.monitor.start(outdir, force=True)
-    # env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
-    env.monitor.configure(video_callable=lambda count: False)
+    env.monitor.start(outdir, force=True, video_callable=lambda count: count % 1 == 0)
+    # env.monitor.configure(video_callable=lambda count: False)
 
     episode_count = 2000
     max_steps = 200
@@ -120,13 +120,13 @@ def main():
 
 
     temp = list()
-    for i in xrange(episode_count):
+    for i in range(episode_count):
         ob = env.reset()
 
-        for j in xrange(max_steps):
+        for j in range(max_steps):
             # print(ob)
-            # import time
-            # time.sleep(0.1)  # delays for 5 seconds
+            import time
+            time.sleep(0.1)  # delays for 5 seconds
             action = agent.act(ob, reward, done)
             # print(action)
             # print(agent.best, agent.alpha, agent.best_score, agent.best_count)

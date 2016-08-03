@@ -15,7 +15,7 @@ from MonteCarloAgent import MonteCarloAgent
 from SimulatedAnnealingAgent import SimulatedAnnealingAgent
 
 
-def runner(x):
+def runner(Agent):
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
