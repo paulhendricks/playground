@@ -9,8 +9,7 @@ import sys
 import gym
 
 if os.getcwd() == '/Users/paulhendricks/Projects/playground':
-    sys.path.extend([os.path.abspath('./agents/blind')])
-    sys.path.extend([os.path.abspath('./agents/local')])
+    sys.path.extend([os.path.abspath('./agents')])
 else:
     sys.path.extend([os.path.abspath('../../agents')])
 
