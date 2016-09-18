@@ -8,11 +8,18 @@ import sys
 
 import gym
 
-sys.path.extend([os.path.abspath('../../agents')])
+if os.getcwd() == '/Users/paulhendricks/Projects/playground':
+    sys.path.extend([os.path.abspath('./agents/blind')])
+    sys.path.extend([os.path.abspath('./agents/local')])
+else:
+    sys.path.extend([os.path.abspath('../../agents')])
 
-from HillClimbingAgent import HillClimbingAgent
-from MonteCarloAgent import MonteCarloAgent
-from SimulatedAnnealingAgent import SimulatedAnnealingAgent
+from local import FullBlindAgent
+from local import GridAgent
+from local import MonteCarloAgent
+from blind import HillClimbingAgent
+from blind import SimulatedAnnealingAgent
+from blind import TabuAgent
 
 
 def runner(Agent):
