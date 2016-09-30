@@ -13,12 +13,13 @@ if os.getcwd() == '/Users/paulhendricks/Projects/playground':
 else:
     sys.path.extend([os.path.abspath('../../agents')])
 
-from local import FullBlindAgent
-from local import GridAgent
-from local import MonteCarloAgent
-from blind import HillClimbingAgent
-from blind import SimulatedAnnealingAgent
-from blind import TabuAgent
+# from local import FullBlindAgent
+# from local import GridAgent
+# from local import MonteCarloAgent
+# from blind import HillClimbingAgent
+#
+# from blind import TabuAgent
+from local import SimulatedAnnealingAgent
 
 
 def runner(Agent):
@@ -40,10 +41,10 @@ def runner(Agent):
 
 
     temp = list()
-    for i in xrange(episode_count):
+    for i in range(episode_count):
         ob = env.reset()
 
-        for j in xrange(max_steps):
+        for j in range(max_steps):
             # print(ob)
             # import time
             # time.sleep(0.1)  # delays for 5 seconds
@@ -61,6 +62,4 @@ def runner(Agent):
 
 
 if __name__ == '__main__':
-    runner(HillClimbingAgent)
-    runner(MonteCarloAgent)
     runner(SimulatedAnnealingAgent)
