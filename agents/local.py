@@ -1,11 +1,11 @@
-"""Hill Climbing Agent for Cartpole Simulation
+"""Local Search Agents
 
 Not Complete!
 """
 import random
 
 
-__all__ = ['HillClimbingAgent', 'SimulatedAnnealingAgent', 'TabuAgent']
+__all__ = ['SimulatedAnnealingAgent']
 
 
 random.seed(0)   # So scores are (slightly) more consistent. Randomness in pole counteracts this a bit
@@ -100,7 +100,7 @@ class HillClimbingAgent(object):
 
 class SimulatedAnnealingAgent(object):
     def __init__(self, action_space, repeats=10, alpha=1, decay=0.9, spread=0.1):
-        self.name = 'SimAnn'    # Name to be submitted to OpenAI
+        self.name = 'SimulatedAnnealingAgent'    # Name to be submitted to OpenAI
         self.action_space = action_space  # Just for consistency with other agents, not used in this case
 
         self.alpha = alpha  # Learning rate

@@ -8,7 +8,7 @@ import sys
 
 import gym
 
-if os.getcwd() == '/Users/paulhendricks/Projects/playground':
+if os.getcwd() == '/Users/phendricks/projects/playground':
     sys.path.extend([os.path.abspath('./agents')])
 else:
     sys.path.extend([os.path.abspath('../../agents')])
@@ -19,6 +19,7 @@ else:
 # from blind import HillClimbingAgent
 #
 # from blind import TabuAgent
+from simple import SimpleAgent
 from local import SimulatedAnnealingAgent
 
 
@@ -27,7 +28,7 @@ def runner(Agent):
     logger.setLevel(logging.DEBUG)
 
     env = gym.make('CartPole-v0')
-    agent = Agent(env.action_space, repeats=1, decay=0.99, spread=0.1)   # Initialise agent
+    agent = Agent()   # Initialise agent
 
     outdir = '/tmp/' + agent.name + '-results'
     env.monitor.start(outdir, force=True)
@@ -55,11 +56,10 @@ def runner(Agent):
             if done:
                 temp.append((agent))
                 break
-    print(agent.best)
-    print(len(temp))
     # Dump result info to disk
     env.monitor.close()
 
 
 if __name__ == '__main__':
+    runner(SimpleAgent)
     runner(SimulatedAnnealingAgent)
