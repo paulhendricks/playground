@@ -1,4 +1,4 @@
-"""Local Search Agents
+"""Run the agent in the environment
 
 Complete!
 """
