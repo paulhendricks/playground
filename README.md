@@ -5,6 +5,8 @@
 To create a Conda environment, please enter the following into a shell:
 
 ```shell
+git clone 
+cd playground https://github.com/paulhendricks/playground.git
 ./scripts/setup_osx.sh
 ```
 
