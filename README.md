@@ -1,4 +1,4 @@
-# Playground
+# playground
 
 ## Setup
 
