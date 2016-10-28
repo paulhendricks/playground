@@ -1,17 +1,15 @@
 """Cartpole example
-
-Complete!
 """
 import gym
 
-from playground.local import SimulatedAnnealingAgent
-from playground.run import run
+from playground.algos.local import SimulatedAnnealingAgent
+from playground.utils import run_experiment
 
 
 def main():
     env = gym.make('CartPole-v0')
     agent = SimulatedAnnealingAgent(env.action_space)
-    run(env, agent)
+    run_experiment(env, agent)
 
 
 if __name__ == '__main__':

@@ -1,12 +1,10 @@
-"""Run the agent in the environment
-
-Complete!
+"""Utility functions for running an agent in an environment.
 """
 
-__all__ = ['run']
+__all__ = ['run_experiment']
 
 
-def run(env, agent):
+def run_experiment(env, agent):
     outdir = '/tmp/' + agent.name + '-results'
     env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
 

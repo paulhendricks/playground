@@ -1,6 +1,4 @@
-"""Local Search Agents
-
-Complete!
+"""Local Search Agents.
 """
 import random
 

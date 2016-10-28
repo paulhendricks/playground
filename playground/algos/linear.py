@@ -1,6 +1,4 @@
-"""Linear Agents
-
-Complete!
+"""Linear Agents.
 """
 import numpy as np
 

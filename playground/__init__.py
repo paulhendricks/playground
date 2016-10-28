@@ -1,8 +1,6 @@
-from .linear import LinearAgent
-from .local import SimulatedAnnealingAgent
-from .run import run
+from . import algos
+from . import utils
 
 __all__ = []
-__all__ += ['LinearAgent']
-__all__ = ['SimulatedAnnealingAgent']
-__all__ = ['run']
+__all__ += algos.__all__
+__all__ += utils.__all__
