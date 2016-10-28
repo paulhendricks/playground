@@ -1,0 +1,6 @@
+name: playground
+dependencies:
+  - python=3.5
+  - numpy
+  - pip:
+      - git+https://github.com/openai/gym.git
