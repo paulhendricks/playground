@@ -1,10 +1,12 @@
 """Blind Search Agents.
 """
+from .agent import Agent
+
 
 __all__ = ['GridSearchAgent', 'MonteCarloAgent']
 
 
-class GridSearchAgent(object):
+class GridSearchAgent(Agent):
     def __init__(self, observation_space, action_space):
         self.name = 'GridSearchAgent'    # Name to be submitted to OpenAI
         self.observation_space = observation_space
@@ -14,7 +16,7 @@ class GridSearchAgent(object):
         return self.action_space.sample()
 
 
-class MonteCarloAgent(object):
+class MonteCarloAgent(Agent):
     def __init__(self, observation_space, action_space):
         self.name = 'MonteCarloAgent'    # Name to be submitted to OpenAI
         self.observation_space = observation_space

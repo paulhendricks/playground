@@ -1,10 +1,11 @@
 """Random Agents.
 """
+from .agent import Agent
 
 __all__ = ['RandomAgent']
 
 
-class RandomAgent(object):
+class RandomAgent(Agent):
     def __init__(self, observation_space, action_space):
         self.name = 'RandomAgent'    # Name to be submitted to OpenAI
         self.observation_space = observation_space

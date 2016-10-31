@@ -3,11 +3,13 @@
 import numpy as np
 import random
 
+from .agent import Agent
+
 
 __all__ = ['HillClimbingAgent', 'SimulatedAnnealingAgent']
 
 
-class HillClimbingAgent(object):
+class HillClimbingAgent(Agent):
     def __init__(self, observation_space, action_space, spread=0.1):
         self.name = 'HillClimbingAgent'    # Name to be submitted to OpenAI
         self.observation_space = observation_space
@@ -22,7 +24,7 @@ class HillClimbingAgent(object):
         return self.action_space.sample()
 
 
-class SimulatedAnnealingAgent(object):
+class SimulatedAnnealingAgent(Agent):
     def __init__(self, observation_space, action_space, repeats=10, alpha=1, decay=0.9, spread=0.1):
         self.name = 'SimulatedAnnealingAgent'    # Name to be submitted to OpenAI
         self.action_space = action_space  # Just for consistency with other agents, not used in this case
