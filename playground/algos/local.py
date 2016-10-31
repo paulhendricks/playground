@@ -1,12 +1,33 @@
 """Local Search Agents.
 """
+import numpy as np
 import random
 
 
-__all__ = ['SimulatedAnnealingAgent']
+__all__ = ['HillClimbingAgent', 'SimulatedAnnealingAgent']
 
 
-random.seed(0)   # So scores are (slightly) more consistent. Randomness in pole counteracts this a bit
+class HillClimbingAgent(object):
+    def __init__(self, action_space, spread=0.1):
+        self.name = 'HillClimbingAgent'    # Name to be submitted to OpenAI
+        self.action_space = action_space
+
+        self.spread = spread  # Spread of randomness when selecting new values to test
+        self.parameters = np.random.rand(4) * 2 - 1
+        self.best_score = 0
+
+    def act(self, observation, reward, done):
+        # counter += 1
+        # newparams = self.parameters + (np.random.rand(4) * 2 - 1) * self.spread
+        # reward = run_episode(env,newparams)
+        # # print "reward %d best %d" % (reward, bestreward)
+        # if reward > bestreward:
+        #     # print "update"
+        #     bestreward = reward
+        #     parameters = newparams
+        #     if reward == 200:
+        #         1
+        return self.action_space.sample()
 
 
 class SimulatedAnnealingAgent(object):

@@ -21,5 +21,6 @@ def run_experiment(env, agent):
             ob, reward, done, _ = env.step(action)
             if done:
                 break
+
     # Dump result info to disk
     env.monitor.close()

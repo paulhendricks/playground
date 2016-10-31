@@ -1,6 +1,6 @@
 from . import algos
-from . import utils
+from . import experiment
 
 __all__ = []
 __all__ += algos.__all__
-__all__ += utils.__all__
+__all__ += experiment.__all__

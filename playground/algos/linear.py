@@ -11,5 +11,5 @@ class LinearAgent(object):
         self.name = 'LinearAgent'    # Name to be submitted to OpenAI
         self.parameter = [0.5, 0.5, 0.5, 0.5]
 
-    def act(self, observation):
+    def act(self, observation, reward, done):
         return np.sign(np.dot(self.parameter, observation))

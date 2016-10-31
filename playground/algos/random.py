@@ -1,9 +1,7 @@
-"""Linear Agents.
+"""Random Agents.
 """
-import numpy as np
 
-
-__all__ = ['LinearAgent']
+__all__ = ['RandomAgent']
 
 
 class RandomAgent(object):
@@ -11,5 +9,5 @@ class RandomAgent(object):
         self.name = 'RandomAgent'    # Name to be submitted to OpenAI
         self.action_space = action_space
 
-    def act(self):
+    def act(self, observation, reward, done):
         return self.action_space.sample()
