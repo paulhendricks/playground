@@ -8,21 +8,21 @@ from playground.experiment import run_experiment
 env = gym.make('CartPole-v0')
 
 # Run random agent
-agent = RandomAgent(env.action_space)
+agent = RandomAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
 
 # Run grid search agent
-agent = GridSearchAgent(env.action_space)
+agent = GridSearchAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
 
 # Run monte carlo agent
-agent = MonteCarloAgent(env.action_space)
+agent = MonteCarloAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
 
 # Run hill climbing agent
-agent = HillClimbingAgent(env.action_space)
+agent = HillClimbingAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
 
 # Run simulated annealing agent
-agent = SimulatedAnnealingAgent(env.action_space)
+agent = SimulatedAnnealingAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
