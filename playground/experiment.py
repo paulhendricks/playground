@@ -20,6 +20,6 @@ def run_experiment(env, agent, episode_count=200, max_steps=200, watch=True):
             if done:
                 break
 
-    # Dump result info to disk
     if watch:
+        # Dump result info to disk
         env.monitor.close()
