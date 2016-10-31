@@ -1,4 +1,5 @@
 import gym
+from playground.algos.blind import GridSearchAgent, MonteCarloAgent
 from playground.algos.local import HillClimbingAgent, SimulatedAnnealingAgent
 from playground.algos.random import RandomAgent
 from playground.experiment import run_experiment
@@ -8,6 +9,14 @@ env = gym.make('CartPole-v0')
 
 # Run random agent
 agent = RandomAgent(env.action_space)
+run_experiment(env, agent)
+
+# Run grid search agent
+agent = GridSearchAgent(env.action_space)
+run_experiment(env, agent)
+
+# Run monte carlo agent
+agent = MonteCarloAgent(env.action_space)
 run_experiment(env, agent)
 
 # Run hill climbing agent
