@@ -4,15 +4,13 @@
 __all__ = ['run_experiment']
 
 
-def run_experiment(env, agent):
-    outdir = '/tmp/' + agent.name + '-results'
-    env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
+def run_experiment(env, agent, episode_count=200, max_steps=200, watch=True):
+    if watch:
+        outdir = '/tmp/' + agent.name + '-results'
+        env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
 
-    episode_count = 200
-    max_steps = 200
     reward = 0
     done = False
-
     for i in range(episode_count):
         ob = env.reset()
 
@@ -23,4 +21,5 @@ def run_experiment(env, agent):
                 break
 
     # Dump result info to disk
-    env.monitor.close()
+    if watch:
+        env.monitor.close()
