@@ -1,5 +1,4 @@
 import gym
-from playground.algos.linear import LinearAgent
 from playground.algos.local import HillClimbingAgent, SimulatedAnnealingAgent
 from playground.algos.random import RandomAgent
 from playground.experiment import run_experiment
@@ -9,10 +8,6 @@ env = gym.make('CartPole-v0')
 
 # Run random agent
 agent = RandomAgent(env.action_space)
-run_experiment(env, agent)
-
-# Run linear agent
-agent = LinearAgent(env.action_space)
 run_experiment(env, agent)
 
 # Run hill climbing agent

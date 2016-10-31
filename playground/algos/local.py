@@ -8,30 +8,22 @@ __all__ = ['HillClimbingAgent', 'SimulatedAnnealingAgent']
 
 
 class HillClimbingAgent(object):
-    def __init__(self, action_space, spread=0.1):
+    def __init__(self, observation_space, action_space, spread=0.1):
         self.name = 'HillClimbingAgent'    # Name to be submitted to OpenAI
+        self.observation_space = observation_space
         self.action_space = action_space
+        self.n = observation_space.shape[0]
+        self.parameters = np.random.rand(self.n) * 2 - 1
 
         self.spread = spread  # Spread of randomness when selecting new values to test
-        self.parameters = np.random.rand(4) * 2 - 1
         self.best_score = 0
 
     def act(self, observation, reward, done):
-        # counter += 1
-        # newparams = self.parameters + (np.random.rand(4) * 2 - 1) * self.spread
-        # reward = run_episode(env,newparams)
-        # # print "reward %d best %d" % (reward, bestreward)
-        # if reward > bestreward:
-        #     # print "update"
-        #     bestreward = reward
-        #     parameters = newparams
-        #     if reward == 200:
-        #         1
         return self.action_space.sample()
 
 
 class SimulatedAnnealingAgent(object):
-    def __init__(self, action_space, repeats=10, alpha=1, decay=0.9, spread=0.1):
+    def __init__(self, observation_space, action_space, repeats=10, alpha=1, decay=0.9, spread=0.1):
         self.name = 'SimulatedAnnealingAgent'    # Name to be submitted to OpenAI
         self.action_space = action_space  # Just for consistency with other agents, not used in this case
 
