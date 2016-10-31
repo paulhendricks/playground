@@ -11,11 +11,7 @@ env = gym.make('CartPole-v0')
 agent = RandomAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
 
-# Run grid search agent
-agent = GridSearchAgent(env.observation_space, env.action_space)
-run_experiment(env, agent)
-
-# Run monte carlo agent
+# Run random guessing (a.k.a. monte carlo) agent
 agent = MonteCarloAgent(env.observation_space, env.action_space)
 run_experiment(env, agent)
 
