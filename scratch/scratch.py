@@ -1,5 +1,5 @@
 import gym
-from playground.algos.random import RandomAgent
+from playground.algos.blind import MonteCarloAgent
 from playground.experiment import run_experiment
 
 
@@ -7,5 +7,5 @@ from playground.experiment import run_experiment
 env = gym.make('CartPole-v0')
 
 # Run random agent
-agent = RandomAgent(env.observation_space, env.action_space)
-run_experiment(env, agent)
+agent = MonteCarloAgent(env.observation_space, env.action_space)
+bourne = run_experiment(env, agent, episode_count=1000)

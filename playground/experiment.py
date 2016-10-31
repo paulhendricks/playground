@@ -13,6 +13,7 @@ def run_experiment(env, agent, episode_count=200, max_steps=200, watch=True):
     done = False
     for i in range(episode_count):
         ob = env.reset()
+        print(agent.episode_number)
 
         for j in range(max_steps):
             action = agent.act(ob, reward, done)
@@ -23,3 +24,5 @@ def run_experiment(env, agent, episode_count=200, max_steps=200, watch=True):
     if watch:
         # Dump result info to disk
         env.monitor.close()
+
+    return agent
