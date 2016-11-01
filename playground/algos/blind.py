@@ -14,9 +14,8 @@ class MonteCarloAgent(Agent):
         self.observation_space = observation_space
         self.action_space = action_space
         self.n = observation_space.shape[0]
-        self.parameters = np.random.rand(self.n) * 2 - 1
+        self.parameters = np.zeros(self.n)
         self.episode_reward = 0
-        self.episode_number = 1
 
         # Set best values
         self.best_parameters = np.zeros(self.n)
@@ -43,7 +42,6 @@ class MonteCarloAgent(Agent):
 
         # Reset episode reward
         self.episode_reward = 0
-        self.episode_number += 1
 
     def act(self, observation, reward, done):
         # If new episode, choose new parameters

@@ -16,8 +16,9 @@ agent = MonteCarloAgent(env.observation_space, env.action_space)
 result = run_experiment(env, agent)
 
 # Run hill climbing agent
-agent = HillClimbingAgent(env.observation_space, env.action_space, spread=0.5)
-result = run_experiment(env, agent)
+agent = HillClimbingAgent(env.observation_space, env.action_space, spread=0.2)
+result = run_experiment(env, agent, episode_count=5000, watch=False)
+run_experiment(env, result)
 
 # Run simulated annealing agent
 agent = SimulatedAnnealingAgent(env.observation_space, env.action_space)
