@@ -22,4 +22,4 @@ run_experiment(env, result)
 
 # Run simulated annealing agent
 agent = SimulatedAnnealingAgent(env.observation_space, env.action_space)
-result = run_experiment(env, agent, episode_count=2000)
+result = run_experiment(env, agent, episode_count=5000)
