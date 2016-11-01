@@ -50,20 +50,19 @@ class HillClimbingAgent(Agent):
         self.episode_number += 1
 
     def act(self, observation, reward, done):
-        # Check if previous episode terminated and clean up for new episode
-        if done:
-            self.reset()
+        # If new episode, choose new parameters
+        if self.episode_reward == 0:
+            self.update_parameters()
 
         # Increment reward
         self.episode_reward += reward
 
-        # If new episode, choose new parameters
-        if self.episode_reward == 0:
-            self.episode_reward += 1
-            self.update_parameters()
-
         # Choose an action
         action = self.choose_action(observation)
+
+        # Check if previous episode terminated and clean up for new episode
+        if done:
+            self.reset()
 
         # Return action
         return action
@@ -89,7 +88,7 @@ class SimulatedAnnealingAgent(Agent):
         self.repeat_count = 0  # Times repeated running test
 
     # Set the new test values at the start of the episode
-    def set_test(self):
+    def update_parameters(self):
         # If less than required repeats than just run again
         if self.repeat_count < self.repeats:
             self.repeat_count += 1
@@ -112,9 +111,29 @@ class SimulatedAnnealingAgent(Agent):
         self.best = [(self.best[i] * self.best_count + self.test[i]) / (self.best_count + 1) for i in range(self.obs_count)]
         self.best_count += 1
 
+    def reset(self):
+        # If score is the same as best then the amount of variance in future choices goes down
+        # Set the new best to be the average of all the best scores so far (using incremental mean)
+        if self.ep_score == self.best_score:
+            self.alpha *= self.decay
+            self.update_best()
+
+        # If new score is greater then set everything to that
+        elif self.ep_score > self.best_score:
+            self.best_score = self.ep_score
+            self.best = self.test
+            self.best_count = 0
+            self.alpha *= self.decay
+
+        # If new score isn't >= then increase the spread when selecting values
+        # This helps get around issues making incorrect starting decisions but can probably be improved
+        else:
+            self.alpha /= self.decay
+
+        self.ep_score = 0
+
     # What gets called
     def act(self, observation, reward, done):
-
         # Set initial values if first time agent is seeing observations
         if self.obs_count == 0:
             self.obs_count = len(observation)
@@ -123,7 +142,7 @@ class SimulatedAnnealingAgent(Agent):
 
         # Set new test values for new episode
         if self.ep_score == 0:
-            self.test = self.set_test()
+            self.test = self.update_parameters()
 
         # Select action
         action = self.choose_action(observation)
@@ -132,24 +151,6 @@ class SimulatedAnnealingAgent(Agent):
         self.ep_score += reward
 
         if done:
-            # If score is the same as best then the amount of variance in future choices goes down
-            # Set the new best to be the average of all the best scores so far (using incremental mean)
-            if self.ep_score == self.best_score:
-                self.alpha *= self.decay
-                self.update_best()
-
-            # If new score is greater then set everything to that
-            elif self.ep_score > self.best_score:
-                self.best_score = self.ep_score
-                self.best = self.test
-                self.best_count = 0
-                self.alpha *= self.decay
-
-            # If new score isn't >= then increase the spread when selecting values
-            # This helps get around issues making incorrect starting decisions but can probably be improved
-            else:
-                self.alpha /= self.decay
-
-            self.ep_score = 0
+            self.reset()
 
         return action
