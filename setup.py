@@ -17,5 +17,5 @@ setup(
     author='Paul Hendricks',
     author_email='paul.hendricks.2013@owu.edu',
     license='MIT',
-    packages=find_packages(exclude=['examples', 'scratch', 'scripts']),
+    packages=find_packages(exclude=['examples', 'scripts']),
 )
