@@ -14,7 +14,6 @@ dependencies:
 - zlib=1.2.8=3
 - pip:
   - gym==0.4.9
-  - playground==0.1.0
   - pyglet==1.2.4
   - requests==2.11.1
   - six==1.10.0
