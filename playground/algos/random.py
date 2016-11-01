@@ -11,5 +11,8 @@ class RandomAgent(Agent):
         self.observation_space = observation_space
         self.action_space = action_space
 
-    def act(self, observation, reward, done):
+    def learn(self):
+        pass
+
+    def act(self, observation, reward):
         return self.action_space.sample()

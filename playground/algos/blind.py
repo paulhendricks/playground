@@ -20,7 +20,7 @@ class MonteCarloAgent(Agent):
         self.best_parameters = np.zeros(self.n)
 
         # Set episode values
-        self.episode_number = 1
+        self.episode_count = 0
         self.episode_reward = 0
         self.best_episode_reward = 0
 
@@ -46,18 +46,14 @@ class MonteCarloAgent(Agent):
 
         # Reset episode reward
         self.episode_reward = 0
-        self.episode_number += 1
+        self.episode_count += 1
 
-    def act(self, observation, reward, done):
-        # Check if previous episode terminated and clean up for new episode
-        if done:
-            self.learn()
+    def act(self, observation, reward):
+        # Choose an action
+        action = self.choose_action(observation)
 
         # Increment reward
         self.episode_reward += reward
-
-        # Choose an action
-        action = self.choose_action(observation)
 
         # Return action
         return action
