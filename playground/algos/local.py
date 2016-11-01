@@ -41,30 +41,29 @@ class HillClimbingAgent(Agent):
         delta = noise * self.spread
         self.parameters = self.best_parameters + delta
 
-    def reset(self):
+    def learn(self):
         # Check if episode_reward > best_episode_reward
         if self.episode_reward > self.best_episode_reward:
             self.best_episode_reward = self.episode_reward
             self.best_parameters = self.parameters
+
+        # Update parameters
+        self.update_parameters()
 
         # Reset episode reward
         self.episode_reward = 0
         self.episode_number += 1
 
     def act(self, observation, reward, done):
-        # If new episode, choose new parameters
-        if self.episode_reward == 0:
-            self.update_parameters()
+        # Check if previous episode terminated and clean up for new episode
+        if done:
+            self.learn()
 
         # Increment reward
         self.episode_reward += reward
 
         # Choose an action
         action = self.choose_action(observation)
-
-        # Check if previous episode terminated and clean up for new episode
-        if done:
-            self.reset()
 
         # Return action
         return action
@@ -105,7 +104,7 @@ class SimulatedAnnealingAgent(Agent):
             action = 1
         return action
 
-    def reset(self):
+    def learn(self):
         # If score is the same as best then the amount of variance in future choices goes down
         # Set the new best to be the average of all the best scores so far (using incremental mean)
         if self.episode_reward >= self.best_episode_reward:
@@ -114,24 +113,24 @@ class SimulatedAnnealingAgent(Agent):
             self.alpha *= self.decay
         else:
             self.alpha /= self.decay
+
+        # Update parameters
+        self.update_parameters()
+
+        # Reset episode reward
         self.episode_reward = 0
         self.episode_number += 1
 
     def act(self, observation, reward, done):
-        # If new episode, choose new parameters
-        if self.episode_reward == 0:
-            self.episode_reward += reward
-            self.update_parameters()
+        # Check if previous episode terminated and clean up for new episode
+        if done:
+            self.learn()
 
         # Increment reward
         self.episode_reward += reward
 
         # Choose an action
         action = self.choose_action(observation)
-
-        # Check if previous episode terminated and clean up for new episode
-        if done:
-            self.reset()
 
         # Return action
         return action
