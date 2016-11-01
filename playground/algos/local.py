@@ -8,7 +8,7 @@ from .agent import Agent
 __all__ = ['HillClimbingAgent', 'SimulatedAnnealingAgent']
 
 
-class HillClimbingAgent(object):
+class HillClimbingAgent(Agent):
     def __init__(self, observation_space, action_space, spread=0.1):
         # Initialize agent
         self.name = 'HillClimbingAgent'    # Name to be submitted to OpenAI
@@ -65,7 +65,7 @@ class HillClimbingAgent(object):
         return action
 
 
-class SimulatedAnnealingAgent(object):
+class SimulatedAnnealingAgent(Agent):
     def __init__(self, observation_space, action_space, spread=0.1, alpha=1, decay=0.9):
         # Initialize agent
         self.name = 'SimulatedAnnealingAgent'    # Name to be submitted to OpenAI
