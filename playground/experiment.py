@@ -9,7 +9,6 @@ def run_experiment(env, agent, episode_count=200, max_steps=200, watch=True):
         outdir = '/tmp/' + agent.name + '-results'
         env.monitor.start(outdir, force=True, video_callable=lambda count: count % 50 == 0)
     reward = 0
-    done = False
     for _ in range(episode_count):
         ob = env.reset()
         for _ in range(max_steps):
