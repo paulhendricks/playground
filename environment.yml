@@ -14,6 +14,8 @@ dependencies:
 - zlib=1.2.8=3
 - pip:
   - gym==0.4.9
+  - protobuf==3.0.0b2
   - pyglet==1.2.4
   - requests==2.11.1
   - six==1.10.0
+  - tensorflow==0.10.0rc0
