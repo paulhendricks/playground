@@ -1,6 +1,5 @@
 """Default class for agents.
 """
-import numpy as np
 
 
 __all__ = ['Agent']
