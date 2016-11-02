@@ -4,13 +4,13 @@ import numpy as np
 import random
 import tensorflow as tf
 
-# from .agent import Agent
+from .agent import Agent
 
 
 __all__ = ['PolicyGradientAgent']
 
 
-class PolicyGradientAgent(object):
+class PolicyGradientAgent(Agent):
     def __init__(self, observation_space, action_space):
         self.name = 'PolicyGradientAgent'    # Name to be submitted to OpenAI
         self.observation_space = observation_space
@@ -111,29 +111,7 @@ class PolicyGradientAgent(object):
         return totalreward
 
     def learn(self):
-        pass
+        raise NotImplementedError
 
     def act(self, observation, reward):
-        return self.action_space.sample()
-
-
-import gym
-env = gym.make('CartPole-v0')
-env.monitor.start('/tmp/cartpole-hill/', force=True, video_callable=lambda count: count % 200 == 0)
-agent = PolicyGradientAgent(1, 1)
-policy_grad = agent.policy_gradient()
-value_grad = agent.value_gradient()
-sess = tf.InteractiveSession()
-sess.run(tf.initialize_all_variables())
-for i in range(2000):
-    reward = agent.run_episode(env, policy_grad, value_grad, sess)
-    if reward == 200:
-        print("reward 200")
-        print(i)
-
-t = 0
-for _ in range(1000):
-    reward = agent.run_episode(env, policy_grad, value_grad, sess)
-    t += reward
-print(t / 1000)
-env.monitor.close()
+        raise NotImplementedError
