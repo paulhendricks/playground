@@ -15,11 +15,11 @@ class PolicyGradientAgent(Agent):
         self.name = 'PolicyGradientAgent'    # Name to be submitted to OpenAI
         self.observation_space = observation_space
         self.action_space = action_space
-
-    def softmax(x):
-        e_x = np.exp(x - np.max(x))
-        out = e_x / e_x.sum()
-        return out
+        self.policy_grad = self.policy_gradient()
+        self.value_grad = self.value_gradient()
+        sess = tf.InteractiveSession()
+        sess.run(tf.initialize_all_variables())
+        self.sess = sess
 
     def policy_gradient(self):
         with tf.variable_scope("policy"):
@@ -50,9 +50,10 @@ class PolicyGradientAgent(Agent):
             optimizer = tf.train.AdamOptimizer(0.1).minimize(loss)
             return calculated, observation, newvals, optimizer, loss
 
-    def run_episode(self, env, policy_grad, value_grad, sess):
-        pl_calculated, pl_state, pl_actions, pl_advantages, pl_optimizer = policy_grad
-        vl_calculated, vl_state, vl_newvals, vl_optimizer, vl_loss = value_grad
+    def run_episode(self, env):
+        pl_calculated, pl_state, pl_actions, pl_advantages, pl_optimizer = self.policy_grad
+        vl_calculated, vl_state, vl_newvals, vl_optimizer, vl_loss = self.value_grad
+        sess = self.sess
         observation = env.reset()
         totalreward = 0
         states = []
